@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+<button id='topbtn' onclick='scrollToTop()' title='Go to top'><svg fill='none' height='24' id='i-chevron-top' stroke='currentcolor' stroke-linecap='round' stroke-linejoin='round' stroke-width='5' viewBox='0 -4 32 32' width='24'><path d='M30 20 L16 8 2 20'></path></svg></button>
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("span")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+//back to top           
+var totop = document.getElementById("topbtn");
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {scrollFunction()
+var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById('header-wrapper').style.top = '0'
+  } else {
+    document.getElementById('header-wrapper').style.top = '-80px';
+  }
+  prevScrollpos = currentScrollPos;
+};
+function scrollFunction() {
+  if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+    totop.style.display = "block";
+  } else {
+    totop.style.display = "none";
+  }
+}
+function scrollToTop() {
+    var position =
+        document.body.scrollTop || document.documentElement.scrollTop;
+    if (position) {
+        window.scrollBy(0, -Math.max(1, Math.floor(position / 8)));
+        scrollAnimation = setTimeout("scrollToTop()", 5);
+    } else clearTimeout(scrollAnimation);
+}
+</script>
+  </body>
+
+</html>
